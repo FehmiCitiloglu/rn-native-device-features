@@ -16,3 +16,4 @@ web-build/
 
 # env files
 .env
+.env.development
