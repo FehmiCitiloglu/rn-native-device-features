@@ -47,7 +47,7 @@ const LocationPicker = () => {
 
     if (pickedLocation) {
         locationPreview = <Image style={styles.image} source={{ uri: getMapPreview(pickedLocation.lat, pickedLocation.lng) }} />
-        console.log(getMapPreview(pickedLocation.lat, pickedLocation.lng))
+
     }
     return (
         <View style={styles.rootContainer}>

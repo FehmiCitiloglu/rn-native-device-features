@@ -18,8 +18,8 @@ const PlacesList = ({ places }) => {
         <FlatList
             data={places}
             keyExtractor={(place) => place.id}
-            renderItem={({ item, ...rest }) => {
-                console.log("rest", rest)
+            renderItem={({ item }) => {
+
                 return <PlaceItem place={item} />
             }}
         />

@@ -38,7 +38,6 @@ const ImagePicker = () => {
             quality: 0.5,
         })
 
-        console.log("image", image)
         setPickedImage(image)
 
     }
