@@ -4,12 +4,12 @@ import OutlineButton from '../ui/OutlineButton'
 import { Colors } from '../../constants/colors';
 
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
-import { getMapPreview } from '../../util/location';
+import { getAddress, getMapPreview } from '../../util/location';
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 
 
 
-const LocationPicker = () => {
+const LocationPicker = ({ onLocationPick }) => {
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions()
     const navigation = useNavigation()
     const route = useRoute()
@@ -19,14 +19,6 @@ const LocationPicker = () => {
     const [pickedLocation, setPickedLocation] = useState()
 
     const isFocused = useIsFocused()
-
-    // const mapPickedLocation = route.params && { lat: route.params.pickedLat, lng: route.params.pickedLng }
-
-    // useEffect(() => {
-    //     if (mapPickedLocation) {
-    //         setPickedLocation(mapPickedLocation)
-    //     }
-    // }, [mapPickedLocation])
 
     useEffect(() => {
         if (isFocused && route.params) {
@@ -38,12 +30,25 @@ const LocationPicker = () => {
         }
     }, [route, isFocused]);
 
+    useEffect(() => {
+        const handleLocation = async () => {
+            if (pickedLocation) {
+                const address = getAddress(pickedLocation.lat, pickedLocation.lng)
+                onLocationPick({ ...pickedLocation, address });
+            }
+        }
+
+        handleLocation()
+
+    }, [pickedLocation, onLocationPick])
+
     const verifyPermissions = async () => {
 
         if (locationPermissionInformation.status === PermissionStatus.UNDETERMINED) {
             const permissionResponse = await requestPermission();
             return permissionResponse.granted
         }
+
         if (locationPermissionInformation.status === PermissionStatus.DENIED) {
             Alert.alert('Insufficient Permissions!', "You need to grant location permissions to use this app.")
             return false

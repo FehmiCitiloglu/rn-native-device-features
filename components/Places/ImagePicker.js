@@ -4,7 +4,7 @@ import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-
 import { Colors } from '../../constants/colors'
 import OutlineButton from '../ui/OutlineButton'
 
-const ImagePicker = () => {
+const ImagePicker = ({ onImageTaken }) => {
 
     const [pickedImage, setPickedImage] = React.useState("")
 
@@ -39,7 +39,7 @@ const ImagePicker = () => {
         })
 
         setPickedImage(image)
-
+        onImageTaken(image)
     }
 
 
