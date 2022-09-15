@@ -24,7 +24,7 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name={"All Places"}
+            name={"AllPlaces"}
             component={AllPlaces}
             options={({ navigation }) => ({
               title: "You Favorite Places",

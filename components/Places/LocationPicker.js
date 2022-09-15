@@ -77,7 +77,7 @@ const LocationPicker = ({ onLocationPick }) => {
 
     }
     return (
-        <View style={styles.rootContainer}>
+        <View >
             <View style={styles.mapPreview}>
                 {locationPreview}
             </View>
@@ -92,9 +92,7 @@ const LocationPicker = ({ onLocationPick }) => {
 export default LocationPicker
 
 const styles = StyleSheet.create({
-    rootContainer: {
-        marginBottom: 50
-    },
+
     mapPreview: {
         width: '100%',
         height: 200,

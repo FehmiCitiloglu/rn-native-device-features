@@ -16,8 +16,6 @@ const PlaceForm = ({ onCreatePlace }) => {
         setEnteredTitle(enteredText)
     }
 
-
-
     const takeImageHandler = (imageUri) => {
         setSelectedImage(imageUri)
     }
