@@ -4,6 +4,7 @@ import PlaceItem from './PlaceItem'
 import { Colors } from '../../constants/colors'
 
 const PlacesList = ({ places }) => {
+    console.log("places", places)
 
     if (!places || places.length === 0) {
         return (
@@ -12,7 +13,7 @@ const PlacesList = ({ places }) => {
             </View>
         )
     }
-    console.log("places", places)
+
 
     return (
         <FlatList

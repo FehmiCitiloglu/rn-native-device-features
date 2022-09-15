@@ -5,7 +5,9 @@ import PlaceForm from '../components/Places/PlaceForm'
 const AddPlace = ({ navigation }) => {
 
     const createPlaceHandler = (place) => {
-        navigation.navigate('AllPlaces', { place: place })
+        console.log("place", place);
+        navigation.setOptions({ place: { ...place } })
+        navigation.navigate('AllPlaces')
     }
 
 
@@ -16,4 +18,3 @@ const AddPlace = ({ navigation }) => {
 
 export default AddPlace
 
-const styles = StyleSheet.create({})

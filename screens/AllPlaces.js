@@ -9,24 +9,27 @@ const AllPlaces = ({ route }) => {
     const isFocused = useIsFocused()
 
 
-    useEffect(() => {
 
+    useEffect(() => {
         if (isFocused && route.params) {
+            console.log("works")
             console.log('AllPlaces screen is focused')
+            console.log('AllPlaces screen is focused', route.params.place)
             setLoadedPlaces((currPlaces) => {
                 console.log("place", currPlaces, route.params.place)
                 return [...currPlaces, route.params.place]
             })
         }
 
-
-
     }, [isFocused])
 
+    useEffect(() => {
+        console.log("loadedPlaces", loadedPlaces)
+    }, [loadedPlaces])
 
 
     return (
-        <PlacesList place={loadedPlaces} />
+        <PlacesList places={loadedPlaces} />
     )
 }
 

@@ -8,14 +8,22 @@ const ImagePicker = ({ onImageTaken }) => {
 
     const [pickedImage, setPickedImage] = React.useState("")
 
-    const [cameraPermissionInformation, requestPermission] = useCameraPermissions()
+    const [cameraPermissionInformation, requestPermission, getCameraPermissionsAsync] = useCameraPermissions()
 
     async function verifyPermissions() {
+
+        const permissionResponse = await getCameraPermissionsAsync();
+
+        if (permissionResponse.canAskAgain && permissionResponse.status === PermissionStatus.DENIED) {
+            const permissionResponse = await requestPermission();
+            return permissionResponse.granted
+        }
 
         if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
             const permissionResponse = await requestPermission();
             return permissionResponse.granted
         }
+
         if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
             Alert.alert('Insufficient Permissions!', "You need to grant camera permissions to use this app.")
             return false
