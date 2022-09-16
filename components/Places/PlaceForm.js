@@ -25,6 +25,7 @@ const PlaceForm = ({ onCreatePlace }) => {
     }, [])
 
     const savePlaceHandler = () => {
+        console.log("works");
         const placeData = new Place(enteredTitle, selectedImage, pickedLocation)
         onCreatePlace(placeData)
     };
@@ -51,7 +52,7 @@ export default PlaceForm
 const styles = StyleSheet.create({
     form: {
         flex: 1,
-        padding: 24
+        padding: 24,
     },
     label: {
         fontWeight: 'bold',
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         fontSize: 16,
         borderBottomColor: Colors.primary700,
-        bordeBottomWidth: 2,
+        borderBottomWidth: 2,
         backgroundColor: Colors.primary100
     }
 })
