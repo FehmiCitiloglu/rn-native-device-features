@@ -19,8 +19,10 @@ export default function App() {
 
   const [dbInitialized, setDbInitialized] = useState(false)
 
-  useEffect(() => {
-    init().then(() => { setDbInitialized(true) }).catch(() => setDbInitialized(false))
+  useEffect(async () => {
+    await init()
+      .then(() => { setDbInitialized(true) })
+      .catch(() => setDbInitialized(false))
   }, [])
 
 

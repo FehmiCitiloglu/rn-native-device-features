@@ -25,8 +25,9 @@ const PlaceForm = ({ onCreatePlace }) => {
     }, [])
 
     const savePlaceHandler = () => {
-        console.log("works");
+
         const placeData = new Place(enteredTitle, selectedImage, pickedLocation)
+
         onCreatePlace(placeData)
     };
 
@@ -39,10 +40,11 @@ const PlaceForm = ({ onCreatePlace }) => {
             </View>
             <ImagePicker onImageTaken={takeImageHandler} />
             <LocationPicker onLocationPick={locationPickedHandler} />
-
-            <Button onPress={savePlaceHandler}>
-                Add Place
-            </Button>
+            <View style={{ marginBottom: 50 }}>
+                <Button onPress={savePlaceHandler}>
+                    Add Place
+                </Button>
+            </View>
         </ScrollView>
     )
 }

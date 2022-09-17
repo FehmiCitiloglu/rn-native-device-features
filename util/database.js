@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite';
+import { Place } from '../models/place';
 
 const db = SQLite.openDatabase('places.db');
 
@@ -29,17 +30,25 @@ export const init = () => {
 }
 
 
-export const insertPlace = (place) => {
+export function insertPlace(place) {
     const promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
                 `INSERT INTO places (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
-                [place.title, place.imageUri, place.address, place.location.lat, place.location.lng],
+                [
+                    place.title,
+                    place.imageUri,
+                    place.address,
+                    place.location.lat,
+                    place.location.lng,
+                ],
                 (_, result) => {
+                    console.log("insertPlace result", result);
                     resolve(result);
                 },
-                (_, err) => {
-                    reject(err);
+                (_, error) => {
+                    console.log("insertPlace error", error);
+                    reject(error);
                 }
             );
         });
@@ -56,9 +65,12 @@ export const fetchPlaces = () => {
                 `SELECT * FROM places`,
                 [],
                 (_, result) => {
-                    console.log("result: ", result)
-                    console.log("_: ", _)
-                    resolve(result);
+                    console.log("fetchPlaces works", result)
+                    const places = []
+                    for (const dp of result.rows._array) {
+                        places.push(new Place(dp.title, dp.imageUri, { address: dp.address, lat: dp.lat, lng: dp.lng }, dp.id))
+                    }
+                    resolve(places);
                 },
                 (_, err) => {
                     reject(err);
